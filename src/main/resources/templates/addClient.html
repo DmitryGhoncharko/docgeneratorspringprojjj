@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Добавить клиента</title>
+</head>
+<body>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<h2>Добавить клиента</h2>
+
+<form action="/addClient" method="post">
+  <label for="clSurname">Фамилия:</label><br>
+  <input type="text" id="clSurname" name="clSurname"><br>
+
+  <label for="clName">Имя:</label><br>
+  <input type="text" id="clName" name="clName"><br>
+
+  <label for="clLastname">Отчество:</label><br>
+  <input type="text" id="clLastname" name="clLastname"><br>
+
+  <label for="clPassport">Серия паспорта:</label><br>
+  <input type="text" id="clPassport" name="clPassport"><br>
+
+  <label for="clInfo">Когда и кем выдан паспорт:</label><br>
+  <input type="text" id="clInfo" name="clInfo"><br>
+
+  <label for="clDateReg">Дата и место рождения:</label><br>
+  <input type="text" id="clDateReg" name="clDateReg"><br>
+
+  <label for="clAddress">Алрес прописки:</label><br>
+  <input type="text" id="clAddress" name="clAddress"><br>
+
+  <label for="clCarUd">Водительское удостоверение:</label><br>
+  <input type="text" id="clCarUd" name="clCarUd"><br><br>
+
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

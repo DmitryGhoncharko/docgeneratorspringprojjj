@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменить машину</title>
+</head>
+<body>
+<h2>Изменить машину</h2>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<form action="/updateCar" method="post">
+    <input type="hidden" name="id" th:value="${car.id}" />
+    <label>Марка и модель машины:</label>
+    <input type="text" name="carModel" th:value="${car.carModel}" /><br>
+    <label>Год выпуска:</label>
+    <input type="text" name="carYear" th:value="${car.carYear}" /><br>
+    <label>Гос номер:</label>
+    <input type="text" name="carGovNumber" th:value="${car.carGovNumber}" /><br>
+    <label>Номер кузова:</label>
+    <input type="text" name="carCzNumber" th:value="${car.carCzNumber}" /><br>
+    <label>Тип кузова:</label>
+    <input type="text" name="carCzType" th:value="${car.carCzType}" /><br>
+    <label>Серия тех паспорта:</label>
+    <input type="text" name="carTex" th:value="${car.carTex}" /><br>
+    <label>Цвет:</label>
+    <input type="text" name="carColor" th:value="${car.carColor}" /><br>
+    <label>Тип ТС:</label>
+    <input type="text" name="carType" th:value="${car.carType}" /><br>
+    <label>Дата тех осмотра:</label>
+    <input type="text" name="carDateTex" th:value="${car.carDateTex}" /><br>
+    <label>Страховое свидетельство(номер):</label>
+    <input type="text" name="carStNum" th:value="${car.carStNum}" /><br>
+    <label>Сумма страховки:</label>
+    <input type="text" name="carStSum" th:value="${car.carStSum}" /><br>
+    <label>Страховое свидетельство действительно по какую дату:</label>
+    <input type="text" name="carStValidDate" th:value="${car.carStValidDate}" /><br>
+    <label>Комплектация машины:</label>
+    <input type="text" name="carInfo" th:value="${car.carInfo}" /><br>
+
+    <button type="submit">Обновить машину</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить машину</title>
+</head>
+<body>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<h2>Добавить машину</h2>
+
+<form action="/addCar" method="post">
+    <label for="carModel">Марка и модель машины:</label><br>
+    <input type="text" id="carModel" name="carModel"><br>
+
+    <label for="carYear">Год выпуска:</label><br>
+    <input type="number" id="carYear" name="carYear"><br>
+
+    <label for="carGovNumber">Гос номер:</label><br>
+    <input type="text" id="carGovNumber" name="carGovNumber"><br>
+
+    <label for="carCzNumber">Номер кузова:</label><br>
+    <input type="text" id="carCzNumber" name="carCzNumber"><br>
+
+    <label for="carCzType">Тип кузова:</label><br>
+    <input type="text" id="carCzType" name="carCzType"><br>
+
+    <label for="carTex">Серия тех паспорта:</label><br>
+    <input type="text" id="carTex" name="carTex"><br>
+
+    <label for="carColor">Цвет:</label><br>
+    <input type="text" id="carColor" name="carColor"><br>
+
+    <label for="carType">Тип ТС:</label><br>
+    <input type="text" id="carType" name="carType"><br>
+
+    <label for="carDateTex">Дата тех осмотра:</label><br>
+    <input type="text" id="carDateTex" name="carDateTex"><br>
+
+    <label for="carStNum">Страховое свидетельство(номер):</label><br>
+    <input type="text" id="carStNum" name="carStNum"><br>
+
+    <label for="carStSum">Сумма страховки:</label><br>
+    <input type="text" id="carStSum" name="carStSum"><br>
+
+    <label for="carStValidDate">Страховое свидетельство действительно по какую дату:</label><br>
+    <input type="text" id="carStValidDate" name="carStValidDate"><br><br>
+
+    <label for="carInfo">Комплектация машины:</label><br>
+    <input type="text" id="carInfo" name="carInfo"><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

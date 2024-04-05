@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клиенты</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+        }
+
+        .btn-success {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+<h2>Клиенты</h2>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<button th:onclick="|window.location.href='/addClient'|"
+        class="btn btn-success">Add Client</button>
+<br><br>
+<table>
+    <tr>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Серия паспорта</th>
+        <th>Когда и кем выдан паспорт</th>
+        <th>Дата и место рождения</th>
+        <th>Адрес прописки</th>
+        <th>Водительское удостоверение</th>
+        <th>Действия</th>
+    </tr>
+    <tr th:each="client : ${clients}">
+        <td th:text="${client.clSurname}"></td>
+        <td th:text="${client.clName}"></td>
+        <td th:text="${client.clLastname}"></td>
+        <td th:text="${client.clPassport}"></td>
+        <td th:text="${client.clInfo}"></td>
+        <td th:text="${client.clDateReg}"></td>
+        <td th:text="${client.clAddress}"></td>
+        <td th:text="${client.clCarUd}"></td>
+        <td>
+            <button th:onclick="'deleteClient(' + ${client.id} + ');'"
+                    class="btn btn-danger">Удалить</button>
+            <button th:onclick="'modifyClient(' + ${client.id} + ');'"
+                    class="btn btn-primary">Изменить</button>
+        </td>
+    </tr>
+</table>
+
+<script th:inline="javascript">
+    function deleteClient(clientId) {
+        fetch('/deleteClient/' + clientId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Client deleted successfully');
+                    window.location.reload();
+                } else {
+                    throw new Error('Failed to delete client');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting client:', error);
+                alert('Failed to delete client');
+            });
+    }
+
+    function modifyClient(clientId) {
+        window.location.href = '/modifyClient/' + clientId;
+    }
+</script>
+</body>
+</html>

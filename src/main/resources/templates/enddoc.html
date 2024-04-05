@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документ</title>
+</head>
+<body>
+<h2>Документ</h2>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<form action="/confirmEnddoc" method="post">
+    <input type="hidden" name="carId" th:value="${carId}">
+    <input type="hidden" name="clientId" th:value="${clientId}">
+
+    <label for="docNumber">Номер документа:</label><br>
+    <input type="text" id="docNumber" name="docNumber"><br><br>
+
+    <button type="submit">Принять</button>
+</form>
+
+</body>
+</html>

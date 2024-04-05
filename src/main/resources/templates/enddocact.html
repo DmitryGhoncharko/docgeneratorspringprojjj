@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документ</title>
+</head>
+<body>
+<h2>Документ</h2>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<form action="/confirmEnddocAct" method="post">
+    <input type="hidden" name="carId" th:value="${carId}">
+    <input type="hidden" name="clientId" th:value="${clientId}">
+
+    <label for="docNumber">Номер договора:</label><br>
+    <input type="text" id="docNumber" name="docNumber"><br><br>
+
+    <label for="docDate">Дата договора:</label><br>
+    <input type="date" id="docDate" name="docDate"><br><br>
+
+    <label for="priceInDay">Ставка рублей в сутки:</label><br>
+    <input type="text" id="priceInDay" name="priceInDay"><br><br>
+
+    <label for="finalPrice">Полная стоимость рублей:</label><br>
+    <input type="text" id="finalPrice" name="finalPrice"><br><br>
+
+    <label for="allRentDays">Колличество суток:</label><br>
+    <input type="text" id="allRentDays" name="allRentDays"><br><br>
+
+    <label for="dayRentStartTime">С какого времени:</label><br>
+    <input type="text" id="dayRentStartTime" name="dayRentStartTime"><br><br>
+
+    <label for="dayRentStartDays">С какого дня:</label><br>
+    <input type="text" id="dayRentStartDays" name="dayRentStartDays"><br><br>
+
+    <label for="dayRentEndTime">По какое время:</label><br>
+    <input type="text" id="dayRentEndTime" name="dayRentEndTime"><br><br>
+
+    <label for="dayRentEndDays">До какого дня:</label><br>
+    <input type="text" id="dayRentEndDays" name="dayRentEndDays"><br><br>
+
+    <label for="address">Автомобиль предоставлен по адресу:</label><br>
+    <input type="text" id="address" name="address"><br><br>
+
+    <label for="fuel">Колличесто топлива:</label><br>
+    <input type="text" id="fuel" name="fuel"><br><br>
+
+    <button type="submit">Принять</button>
+</form>
+
+</body>
+</html>

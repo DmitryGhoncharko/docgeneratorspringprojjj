@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обновить клиента</title>
+</head>
+<body>
+<h2>Обновить клиента</h2>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<form action="/updateClient" method="post">
+    <input type="hidden" name="id" th:value="${client.id}" />
+    <label>Фамилия:</label>
+    <input type="text" name="clSurname" th:value="${client.clSurname}" /><br>
+    <label>Имя:</label>
+    <input type="text" name="clName" th:value="${client.clName}" /><br>
+    <label>Отчество:</label>
+    <input type="text" name="clLastname" th:value="${client.clLastname}" /><br>
+    <label>Серия паспорта:</label>
+    <input type="text" name="clPassport" th:value="${client.clPassport}" /><br>
+    <label>Когда и кем выдан паспорт:</label>
+    <input type="text" name="clInfo" th:value="${client.clInfo}" /><br>
+    <label>Дата и место рождения:</label>
+    <input type="text" name="clDateReg" th:value="${client.clDateReg}" /><br>
+    <label>Адрес прописки:</label>
+    <input type="text" name="clAddress" th:value="${client.clAddress}" /><br>
+    <label>Водительское удостоверение:</label>
+    <input type="text" name="clCarUd" th:value="${client.clCarUd}" /><br>
+    <button type="submit">Обновить клиента</button>
+</form>
+</body>
+</html>

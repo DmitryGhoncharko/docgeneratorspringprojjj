@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акт приема передачи</title>
+</head>
+<body>
+<h2>Акт приема передачи</h2>
+
+<h3>Cars</h3>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<form id="carForm">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Айди машины</th>
+            <th>Марка и модель машины</th>
+            <th>Год выпуска</th>
+            <th>Гос номер</th>
+            <th>Номер кузова</th>
+            <th>Тип кузова</th>
+            <th>Серия тех паспорта</th>
+            <th>Цвет</th>
+            <th>Тип ТС</th>
+            <th>Дата тех осмотра</th>
+            <th>Страховое свидетельство(номер)</th>
+            <th>Сумма страховки</th>
+            <th>Страховое свидетельство действительно</th>
+            <th>Выбрать</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.id}">1</td>
+            <td th:text="${car.carModel}">Car Model</td>
+            <td th:text="${car.carYear}">Car Year</td>
+            <td th:text="${car.carGovNumber}">Gov Number</td>
+            <td th:text="${car.carCzNumber}">CZ Number</td>
+            <td th:text="${car.carCzType}">CZ Type</td>
+            <td th:text="${car.carTex}">Tex</td>
+            <td th:text="${car.carColor}">Color</td>
+            <td th:text="${car.carType}">Type</td>
+            <td th:text="${car.carDateTex}">Date Tex</td>
+            <td th:text="${car.carStNum}">St Num</td>
+            <td th:text="${car.carStSum}">St Sum</td>
+            <td th:text="${car.carStValidDate}">St Valid Date</td>
+            <td><input type="checkbox" name="selectedCars" th:value="${car.id}"></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+<h3>Clients</h3>
+<form id="clientForm">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Айди клиента</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Серия паспорта</th>
+            <th>Когда и кем выдан паспорт</th>
+            <th>Дата и место прописки</th>
+            <th>Адрес прописки</th>
+            <th>Водительское удостоверение</th>
+            <th>Выбрать</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.id}">1</td>
+            <td th:text="${client.clSurname}">Surname</td>
+            <td th:text="${client.clName}">Name</td>
+            <td th:text="${client.clLastname}">Lastname</td>
+            <td th:text="${client.clPassport}">Passport</td>
+            <td th:text="${client.clInfo}">Info</td>
+            <td th:text="${client.clDateReg}">Date Reg</td>
+            <td th:text="${client.clAddress}">Address</td>
+            <td th:text="${client.clCarUd}">Car UD</td>
+            <td><input type="checkbox" name="selectedClients" th:value="${client.id}"></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+<button onclick="submitSelections()">Сгенерировать документ</button>
+
+<script>
+    function submitSelections() {
+        const selectedCars = document.querySelectorAll('input[name="selectedCars"]:checked');
+        const selectedClients = document.querySelectorAll('input[name="selectedClients"]:checked');
+        if (selectedCars.length !== 1 || selectedClients.length !== 1) {
+            alert('Please select one car and one client.');
+            return;
+        }
+        const carIds = Array.from(selectedCars).map(car => car.value);
+        const clientIds = Array.from(selectedClients).map(client => client.value);
+
+        fetch('/docAct', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ selectedCars: carIds, selectedClients: clientIds })
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to send selections');
+                }
+            })
+            .then(data => {
+                const redirectUrl = `/enddocAct?carId=${data.carId}&clientId=${data.clientId}`;
+                window.open(redirectUrl, '_blank');
+            })
+            .catch(error => {
+                console.error('Error sending selections:', error);
+            });
+    }
+
+</script>
+</body>
+</html>

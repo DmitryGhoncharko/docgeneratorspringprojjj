@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Машины</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+        }
+
+        .btn-success {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+<h2>Машины</h2>
+<a href="/cars">Машины</a>
+<a href="/clients">Клиенты</a>
+<a href="/doc">Договор</a>
+<a href="/docAct">Акт приемки авто</a>
+<br><br>
+<button onclick="window.location.href='/addCar'" class="btn btn-success">Add Car</button>
+<br><br>
+<table>
+    <tr>
+        <th>Марка и модель машины</th>
+        <th>Год выпуска</th>
+        <th>Гос номер</th>
+        <th>Номер кузова</th>
+        <th>Тип кузова</th>
+        <th>Серия тех паспорта</th>
+        <th>Цвет</th>
+        <th>Тип ТС</th>
+        <th>Дата тех осмотра</th>
+        <th>Страховое свидетельство(номер)</th>
+        <th>Сумма страховки</th>
+        <th>Страховое свидетельство действительно по какую дату</th>
+        <th>Комплектация машины</th>
+        <th>Действия</th>
+    </tr>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.carModel}"></td>
+        <td th:text="${car.carYear}"></td>
+        <td th:text="${car.carGovNumber}"></td>
+        <td th:text="${car.carCzNumber}"></td>
+        <td th:text="${car.carCzType}"></td>
+        <td th:text="${car.carTex}"></td>
+        <td th:text="${car.carColor}"></td>
+        <td th:text="${car.carType}"></td>
+        <td th:text="${car.carDateTex}"></td>
+        <td th:text="${car.carStNum}"></td>
+        <td th:text="${car.carStSum}"></td>
+        <td th:text="${car.carStValidDate}"></td>
+        <td th:text="${car.carInfo}"></td>
+
+        <td>
+            <button class="btn btn-danger" th:onclick="'deleteCar(' + ${car.id} + ');'">Удалить</button>
+            <button class="btn btn-primary" th:onclick="'modifyCar(' + ${car.id} + ');'">Изменить</button>
+        </td>
+    </tr>
+</table>
+
+<script th:inline="javascript">
+    function deleteCar(carId) {
+        fetch('/deleteCar/' + carId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Car deleted successfully');
+                    window.location.reload();
+                } else {
+                    throw new Error('Failed to delete car');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting car:', error);
+                alert('Failed to delete car');
+            });
+    }
+
+    function modifyCar(carId) {
+        window.location.href = '/modifyCar/' + carId;
+    }
+</script>
+</body>
+</html>
