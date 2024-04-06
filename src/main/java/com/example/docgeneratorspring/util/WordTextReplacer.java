@@ -61,11 +61,9 @@ public class WordTextReplacer {
         replacements.put("qaao",client.getClDateReg());
         replacements.put("qaap",client.getClAddress());
         replacements.put("qaaq",client.getClCarUd());
-        SimpleDateFormat inputFormat = new SimpleDateFormat(docDate);
-        Date date = inputFormat.parse(docDate);
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy");
-        String formattedDate = outputFormat.format(date);
-        replacements.put("qaar",formattedDate);
+        String[] dt = docDate.split("-");
+        String tmpDate = dt[2] + "-" +dt[1]  + "-" +  dt[0];
+        replacements.put("qaar",tmpDate);
         replacements.put("qaas",docNumber);
         replacements.put("qaah",car.getCarModel());
         replacements.put("qaaj",car.getCarGovNumber());
