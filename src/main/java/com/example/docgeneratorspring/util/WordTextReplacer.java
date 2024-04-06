@@ -75,7 +75,7 @@ public class WordTextReplacer {
         replacements.put("qaay", car.getCarTex());
 
 
-        replacements.put("qabb-x", allRentDays);
+        replacements.put("qabb", allRentDays);
         replacements.put("qabc", dayRentStartTime);
         replacements.put("qabd", dayRentStartDays);
         replacements.put("qabe", dayRentEndTime);
