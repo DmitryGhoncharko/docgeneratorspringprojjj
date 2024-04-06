@@ -17,10 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,7 +38,15 @@ public class ContentController {
 
     @GetMapping("/clients")
     public String clientsPage(Model model) {
-        model.addAttribute("clients", clientRepository.findAll());
+        List<Client> clients = clientRepository.findAll();
+        clients.sort(new Comparator<Client>() {
+            @Override
+            public int compare(Client client1, Client client2) {
+                return client1.getClSurname().toUpperCase(Locale.forLanguageTag("RU"))
+                        .compareTo(client2.getClSurname().toUpperCase(Locale.forLanguageTag("RU")));
+            }
+        });
+        model.addAttribute("clients",clients);
         return "clients";
     }
 
@@ -114,6 +119,13 @@ public class ContentController {
     public String docPage(Model model){
         List<Car> cars = carRepository.findAll();
         List<Client> clients = clientRepository.findAll();
+        clients.sort(new Comparator<Client>() {
+            @Override
+            public int compare(Client client1, Client client2) {
+                return client1.getClSurname().toUpperCase(Locale.forLanguageTag("RU"))
+                        .compareTo(client2.getClSurname().toUpperCase(Locale.forLanguageTag("RU")));
+            }
+        });
         model.addAttribute("cars",cars);
         model.addAttribute("clients",clients);
         return "doc";
@@ -122,6 +134,13 @@ public class ContentController {
     public String docActPage(Model model){
         List<Car> cars = carRepository.findAll();
         List<Client> clients = clientRepository.findAll();
+        clients.sort(new Comparator<Client>() {
+            @Override
+            public int compare(Client client1, Client client2) {
+                return client1.getClSurname().toUpperCase(Locale.forLanguageTag("RU"))
+                        .compareTo(client2.getClSurname().toUpperCase(Locale.forLanguageTag("RU")));
+            }
+        });
         model.addAttribute("cars",cars);
         model.addAttribute("clients",clients);
         return "docAct";
