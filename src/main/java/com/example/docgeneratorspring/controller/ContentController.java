@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.*;
 
 @Controller
@@ -32,7 +33,14 @@ public class ContentController {
 
     @GetMapping("/cars")
     public String carsPage(Model model) {
-        model.addAttribute("cars", carRepository.findAll());
+        List<Car> cars = carRepository.findAll();
+        cars.sort(new Comparator<Car>() {
+            @Override
+            public int compare(Car car1, Car car2) {
+                return car1.getCarModel().compareTo(car2.getCarModel());
+            }
+        });
+        model.addAttribute("cars", cars);
         return "cars";
     }
 
@@ -118,6 +126,12 @@ public class ContentController {
     @GetMapping("/doc")
     public String docPage(Model model){
         List<Car> cars = carRepository.findAll();
+        cars.sort(new Comparator<Car>() {
+            @Override
+            public int compare(Car car1, Car car2) {
+                return car1.getCarModel().compareTo(car2.getCarModel());
+            }
+        });
         List<Client> clients = clientRepository.findAll();
         clients.sort(new Comparator<Client>() {
             @Override
@@ -133,6 +147,12 @@ public class ContentController {
     @GetMapping("/docAct")
     public String docActPage(Model model){
         List<Car> cars = carRepository.findAll();
+        cars.sort(new Comparator<Car>() {
+            @Override
+            public int compare(Car car1, Car car2) {
+                return car1.getCarModel().compareTo(car2.getCarModel());
+            }
+        });
         List<Client> clients = clientRepository.findAll();
         clients.sort(new Comparator<Client>() {
             @Override
@@ -203,7 +223,7 @@ public class ContentController {
                                    @RequestParam("dayRentEndDays") String dayRentEndDays,
                                    @RequestParam("address") String address,
                                    @RequestParam("fuel") String fuel,
-                                   Model model){
+                                   Model model) throws ParseException {
         Optional<Client> clientOptional = clientRepository.findById(clientId);
         Optional<Car> carOptional = carRepository.findById(carId);
         wordTextReplacer.generateDocAct(clientOptional.get(),carOptional.get(),docNumber,docDate,priceInDay,finalPrice,allRentDays,dayRentStartTime,dayRentStartDays,dayRentEndTime,dayRentEndDays,address,fuel);

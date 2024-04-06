@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -53,13 +55,17 @@ public class WordTextReplacer {
             e.printStackTrace();
         }
     }
-    public void generateDocAct(Client client, Car car, String docNumber, String docDate, String priceInDay, String finalPrice, String allRentDays, String dayRentStartTime, String dayRentStartDays, String dayRentEndTime, String dayRentEndDays, String address, String fuel) {
+    public void generateDocAct(Client client, Car car, String docNumber, String docDate, String priceInDay, String finalPrice, String allRentDays, String dayRentStartTime, String dayRentStartDays, String dayRentEndTime, String dayRentEndDays, String address, String fuel) throws ParseException {
         String filePath = "src/main/resources/static/docAct.docx";
         Map<String, String> replacements = new HashMap<>();
         replacements.put("qaao",client.getClDateReg());
         replacements.put("qaap",client.getClAddress());
         replacements.put("qaaq",client.getClCarUd());
-        replacements.put("qaar",docDate);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(docDate);
+        Date date = inputFormat.parse(docDate);
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy");
+        String formattedDate = outputFormat.format(date);
+        replacements.put("qaar",formattedDate);
         replacements.put("qaas",docNumber);
         replacements.put("qaah",car.getCarModel());
         replacements.put("qaaj",car.getCarGovNumber());
